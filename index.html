@@ -8,8 +8,13 @@
 <style>
 /* ============================================================
    SOHAIB AHMED — PORTFOLIO
-   Dark cinematic theme · single accent · vanilla CSS/JS
-   All animations use transform/opacity only (GPU, 60fps)
+   Dark cinematic theme · GSAP + ScrollTrigger + Lenis (CDN)
+   The page is staged like a film: letterbox title sequence,
+   scroll-scrubbed camera moves, a pinned horizontal pan
+   through the showreel, kinetic type and depth parallax.
+   All animations use transform/opacity only (GPU, 60fps).
+   Without JS / with reduced motion the page degrades to a
+   plain static layout with all content visible.
    ============================================================ */
 
 :root {
@@ -35,6 +40,11 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: calc(var(--timeline-h) + var(--nav-h) + 12px);
 }
+
+/* Lenis smooth-scroll hooks */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
 
 body {
   background: var(--bg);
@@ -78,6 +88,57 @@ img, iframe { max-width: 100%; }
 }
 
 /* ------------------------------------------------------------
+   CINEMA LETTERBOX — title sequence overlay (GSAP mode only)
+   ------------------------------------------------------------ */
+.cinema { display: none; }
+.gsap-on .cinema {
+  display: block;
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  pointer-events: none;
+}
+.cinema-bar {
+  position: absolute;
+  left: 0; right: 0;
+  height: 50.5vh;
+  background: #000;
+  will-change: transform;
+}
+.cinema-top    { top: 0;    transform-origin: 50% 0; }
+.cinema-bottom { bottom: 0; transform-origin: 50% 100%; }
+.cinema-title {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  opacity: 0;
+  visibility: hidden;
+  text-align: center;
+  padding: 0 24px;
+}
+.cinema-title span {
+  font-family: "SF Mono", "Cascadia Code", Consolas, monospace;
+  font-size: 14px;
+  letter-spacing: 0.55em;
+  text-indent: 0.55em;
+  color: var(--text);
+}
+.cinema-title em {
+  font-style: normal;
+  font-size: 10px;
+  letter-spacing: 0.4em;
+  text-indent: 0.4em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+.cinema-title em b { color: var(--accent); font-weight: 600; }
+
+/* ------------------------------------------------------------
    CUSTOM CURSOR GLOW
    ------------------------------------------------------------ */
 .cursor-dot,
@@ -102,7 +163,6 @@ img, iframe { max-width: 100%; }
   background: radial-gradient(circle, rgba(255, 92, 31, 0.07) 0%, transparent 60%);
 }
 .cursor-dot.on, .cursor-halo.on { opacity: 1; }
-.cursor-dot.grow { transform-origin: center; }
 @media (pointer: coarse) {
   .cursor-dot, .cursor-halo { display: none; }
 }
@@ -323,6 +383,7 @@ img, iframe { max-width: 100%; }
   padding: 0 clamp(20px, 5vw, 48px);
 }
 section { position: relative; }
+section > .wrap { position: relative; z-index: 1; }
 
 .kicker {
   display: inline-flex;
@@ -346,6 +407,7 @@ section { position: relative; }
   letter-spacing: -0.02em;
   line-height: 1.08;
   margin-bottom: 16px;
+  will-change: transform;
 }
 .section-sub {
   color: var(--text-dim);
@@ -354,18 +416,74 @@ section { position: relative; }
 }
 .section-pad { padding: clamp(90px, 12vw, 150px) 0; }
 
-/* scroll-reveal (JS toggles .in) */
-.reveal {
+/* scroll-reveal fallback (used only when GSAP is unavailable;
+   JS adds html.js and toggles .in) */
+html.js .reveal {
   opacity: 0;
   transform: translateY(36px);
   transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out);
   transition-delay: var(--d, 0s);
   will-change: transform, opacity;
 }
-.reveal.in {
+html.js .reveal.in {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* GSAP mode: hand every entrance over to ScrollTrigger */
+.gsap-on .hero-title .line > span { animation: none; }
+.gsap-on .hero-sub,
+.gsap-on .hero-actions,
+.gsap-on .scroll-hint { animation: none; opacity: 1; }
+
+/* ------------------------------------------------------------
+   KINETIC TYPE STRIPS — giant words that pan with the scroll
+   ------------------------------------------------------------ */
+.kinetic {
+  position: relative;
+  padding: clamp(56px, 9vw, 130px) 0;
+  overflow: hidden;
+}
+.kinetic-line {
+  width: max-content;
+  margin-left: -45vw;
+  white-space: nowrap;
+  font-size: clamp(52px, 9vw, 160px);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  color: var(--text);
+  will-change: transform;
+}
+.kinetic-line + .kinetic-line { margin-top: 0.04em; }
+.kinetic-line i { font-style: normal; color: var(--accent); }
+.kinetic-line b { color: var(--accent); font-weight: 900; }
+.kinetic-line.outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(242, 240, 236, 0.28);
+}
+
+/* giant background word drifting behind a scene */
+.scene-word {
+  position: absolute;
+  top: clamp(10px, 4vw, 60px);
+  left: -4vw;
+  z-index: 0;
+  font-size: clamp(110px, 22vw, 320px);
+  font-weight: 900;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(242, 240, 236, 0.07);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  will-change: transform;
+}
+
+[data-depth] { will-change: transform; }
 
 /* ------------------------------------------------------------
    HERO
@@ -378,13 +496,19 @@ section { position: relative; }
   overflow: hidden;
 }
 
-/* animated gradient backdrop — two huge rotating blobs,
-   transform-only so it composites on the GPU */
+/* animated gradient backdrop — two huge rotating blobs.
+   The spin lives on .blob (CSS keyframes), the scroll parallax
+   on the .blob-wrap parent so the transforms never fight. */
 .hero-bg {
   position: absolute;
   inset: 0;
   overflow: hidden;
   pointer-events: none;
+}
+.blob-wrap {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
 }
 .hero-bg .blob {
   position: absolute;
@@ -449,6 +573,10 @@ section { position: relative; }
   z-index: 2;
   width: 100%;
 }
+/* the "camera" — GSAP pushes into this on load and travels
+   through it on scroll */
+.hero-cam { will-change: transform, opacity; }
+
 .hero-badge {
   display: inline-flex;
   align-items: center;
@@ -601,17 +729,117 @@ section { position: relative; }
 }
 
 /* ------------------------------------------------------------
-   FEATURED WORK
+   FEATURED WORK — pinned horizontal camera pan (desktop, GSAP)
+   Falls back to a plain responsive grid otherwise.
    ------------------------------------------------------------ */
-.work-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 26px;
-  margin-top: 56px;
-  perspective: 1200px;
+.work-stage { position: relative; }
+.work-head {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 5vw, 48px);
 }
-@media (max-width: 980px) { .work-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 620px) { .work-grid { grid-template-columns: 1fr; } }
+.work-track {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 26px;
+  max-width: 1200px;
+  margin: 56px auto 0;
+  padding: 0 clamp(20px, 5vw, 48px);
+}
+@media (min-width: 621px) and (max-width: 900px) {
+  .work-track { grid-template-columns: repeat(2, 1fr); }
+}
+.work-word, .work-progress { display: none; }
+
+@media (min-width: 901px) {
+  .work-track { grid-template-columns: repeat(3, 1fr); }
+
+  /* GSAP mode: full-viewport stage, cards in one long row */
+  .gsap-on #work { padding: 0; }
+  .gsap-on .work-stage {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: clamp(28px, 5vh, 56px);
+    overflow: hidden;
+    padding-top: calc(var(--timeline-h) + var(--nav-h));
+    will-change: transform, opacity;
+  }
+  .gsap-on .work-word {
+    display: block;
+    position: absolute;
+    top: 14%;
+    left: 3vw;
+    z-index: 0;
+    font-size: 18vw;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(242, 240, 236, 0.06);
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+    will-change: transform;
+  }
+  .gsap-on .work-head {
+    position: relative;
+    z-index: 1;
+    max-width: none;
+    width: 100%;
+    margin: 0;
+    padding: 0 8vw;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 48px;
+    will-change: transform;
+  }
+  .gsap-on .work-head .section-title { margin-bottom: 0; }
+  .gsap-on .work-head-right { max-width: 400px; }
+  .gsap-on .work-track {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    gap: 2.5vw;
+    max-width: none;
+    margin: 0;
+    padding: 0 8vw;
+    width: max-content;
+    perspective: 1200px;
+    will-change: transform;
+  }
+  .gsap-on .work-card {
+    width: clamp(400px, 36vw, 580px);
+    flex: none;
+  }
+  .gsap-on .work-progress {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 20px;
+    font-family: "SF Mono", "Cascadia Code", Consolas, monospace;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    color: var(--text-faint);
+  }
+  .gsap-on .work-progress b { color: var(--accent); font-weight: 600; }
+  .gsap-on .work-progress .bar {
+    position: relative;
+    width: 140px; height: 2px;
+    background: rgba(255, 255, 255, 0.12);
+    overflow: hidden;
+  }
+  .gsap-on .work-progress .bar i {
+    position: absolute;
+    inset: 0;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    will-change: transform;
+  }
+}
 
 .work-card {
   position: relative;
@@ -619,7 +847,6 @@ section { position: relative; }
   background: var(--bg-card);
   border: 1px solid var(--line);
   overflow: hidden;
-  transform-style: preserve-3d;
   will-change: transform;
   transition: border-color 0.35s;
 }
@@ -638,6 +865,7 @@ section { position: relative; }
     radial-gradient(circle at 50% 40%, rgba(255,92,31,0.08), transparent 65%),
     #0d0d11;
   overflow: hidden;
+  will-change: transform;
 }
 .video-slot iframe {
   position: absolute;
@@ -701,7 +929,7 @@ section { position: relative; }
   color: var(--text-faint);
 }
 
-/* glare that follows the tilt */
+/* glare that follows the pointer */
 .card-glare {
   position: absolute;
   inset: 0;
@@ -741,7 +969,7 @@ section { position: relative; }
 /* ------------------------------------------------------------
    SERVICES
    ------------------------------------------------------------ */
-.services { background: var(--bg-raised); }
+.services { background: var(--bg-raised); overflow: hidden; }
 .services::before,
 .services::after {
   content: "";
@@ -768,11 +996,12 @@ section { position: relative; }
   background: var(--bg-card);
   padding: 38px 30px;
   overflow: hidden;
-  transition: transform 0.5s var(--ease-out), border-color 0.4s;
+  will-change: transform;
+  transition: border-color 0.4s, box-shadow 0.5s var(--ease-out);
 }
 .service-card:hover {
-  transform: translateY(-8px);
   border-color: rgba(255, 92, 31, 0.4);
+  box-shadow: 0 22px 50px rgba(0, 0, 0, 0.45);
 }
 .service-card::before {
   content: "";
@@ -846,6 +1075,7 @@ section { position: relative; }
   background:
     radial-gradient(600px 200px at 50% 0%, rgba(255,92,31,0.07), transparent),
     var(--bg-card);
+  will-change: transform;
 }
 @media (max-width: 720px) { .stats-row { grid-template-columns: 1fr; } }
 
@@ -880,6 +1110,7 @@ section { position: relative; }
 /* ------------------------------------------------------------
    TESTIMONIALS
    ------------------------------------------------------------ */
+.testimonials { overflow: hidden; }
 .quote-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -896,11 +1127,12 @@ section { position: relative; }
   padding: 36px 30px 30px;
   display: flex;
   flex-direction: column;
-  transition: transform 0.5s var(--ease-out), border-color 0.4s;
+  will-change: transform;
+  transition: border-color 0.4s, box-shadow 0.5s var(--ease-out);
 }
 .quote-card:hover {
-  transform: translateY(-6px);
   border-color: rgba(255, 92, 31, 0.35);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.4);
 }
 .quote-mark {
   font-size: 60px;
@@ -1017,9 +1249,6 @@ section { position: relative; }
   letter-spacing: 0.1em;
 }
 
-/* parallax helpers — JS drives these transforms */
-[data-parallax] { will-change: transform; }
-
 /* ------------------------------------------------------------
    REDUCED MOTION — kill the show, keep the content
    ------------------------------------------------------------ */
@@ -1030,10 +1259,10 @@ section { position: relative; }
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-  .reveal { opacity: 1; transform: none; }
+  html.js .reveal { opacity: 1; transform: none; }
   .hero-title .line > span { transform: none; animation: none; }
   .hero-sub, .hero-actions, .scroll-hint { opacity: 1; animation: none; }
-  .grain, .particles, .cursor-dot, .cursor-halo { display: none; }
+  .grain, .particles, .cursor-dot, .cursor-halo, .cinema { display: none; }
 }
 </style>
 </head>
@@ -1041,6 +1270,16 @@ section { position: relative; }
 
 <!-- film grain overlay -->
 <div class="grain" aria-hidden="true"></div>
+
+<!-- letterbox title sequence (GSAP mode only) -->
+<div class="cinema" aria-hidden="true">
+  <div class="cinema-bar cinema-top"></div>
+  <div class="cinema-bar cinema-bottom"></div>
+  <div class="cinema-title">
+    <span>SOHAIB AHMED</span>
+    <em>A portfolio in <b>motion</b></em>
+  </div>
+</div>
 
 <!-- custom cursor -->
 <div class="cursor-halo" aria-hidden="true"></div>
@@ -1074,13 +1313,13 @@ section { position: relative; }
   <!-- ============ HERO ============ -->
   <section class="hero" id="hero">
     <div class="hero-bg" aria-hidden="true">
-      <div class="blob blob-a" data-parallax="0.18"></div>
-      <div class="blob blob-b" data-parallax="0.10"></div>
+      <div class="blob-wrap" data-depth="0.35"><div class="blob blob-a"></div></div>
+      <div class="blob-wrap" data-depth="0.6"><div class="blob blob-b"></div></div>
     </div>
     <div class="particles" id="particles" aria-hidden="true"></div>
 
     <div class="wrap hero-inner">
-      <div data-parallax="0.32">
+      <div class="hero-cam">
         <span class="hero-badge">
           <span class="rec" aria-hidden="true"></span>
           Available for new projects
@@ -1110,22 +1349,41 @@ section { position: relative; }
     <div class="scroll-hint" aria-hidden="true">Scroll</div>
   </section>
 
-  <!-- ============ FEATURED WORK ============ -->
-  <section class="section-pad" id="work">
-    <div class="wrap">
-      <span class="kicker reveal">Featured Work</span>
-      <h2 class="section-title reveal" style="--d:0.08s">Selected cuts &amp;<br>client campaigns</h2>
-      <p class="section-sub reveal" style="--d:0.16s">
-        A snapshot of recent edits — performance ads, long-form YouTube and
-        short-form content. Press play.
-      </p>
+  <!-- kinetic type — act break 1 -->
+  <div class="kinetic" aria-hidden="true">
+    <div class="kinetic-line" data-kx="9">Stop the scroll <i>—</i> hold attention <i>—</i> convert <i>—</i> stop the scroll <i>—</i> hold attention <i>—</i> convert <i>—</i></div>
+    <div class="kinetic-line outline" data-kx="-11">frame by frame <i>—</i> cut by cut <i>—</i> frame by frame <i>—</i> cut by cut <i>—</i> frame by frame <i>—</i> cut by cut <i>—</i></div>
+  </div>
 
-      <div class="work-grid">
+  <!-- ============ FEATURED WORK (pinned horizontal pan) ============ -->
+  <section class="section-pad" id="work">
+    <div class="work-stage">
+      <div class="work-word" aria-hidden="true">Showreel</div>
+
+      <div class="work-head">
+        <div>
+          <span class="kicker reveal">Featured Work</span>
+          <h2 class="section-title reveal" style="--d:0.08s">Selected cuts &amp;<br>client campaigns</h2>
+        </div>
+        <div class="work-head-right">
+          <p class="section-sub reveal" style="--d:0.16s">
+            A snapshot of recent edits — performance ads, long-form YouTube and
+            short-form content. Press play.
+          </p>
+          <div class="work-progress" aria-hidden="true">
+            <b id="workIdx">01</b>
+            <span class="bar"><i id="workBar"></i></span>
+            <span>06</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="work-track" id="workTrack">
         <!-- To embed: replace the .video-placeholder div inside .video-slot
              with your YouTube/Vimeo iframe. Example:
              <iframe src="https://www.youtube.com/embed/VIDEO_ID"
                      title="Project title" loading="lazy" allowfullscreen></iframe> -->
-        <article class="work-card reveal" data-tilt style="--d:0s">
+        <article class="work-card reveal" style="--d:0s">
           <div class="video-slot">
             <div class="video-placeholder">
               <div class="ph-play" aria-hidden="true"></div>
@@ -1136,7 +1394,7 @@ section { position: relative; }
           <div class="card-glare" aria-hidden="true"></div>
         </article>
 
-        <article class="work-card reveal" data-tilt style="--d:0.08s">
+        <article class="work-card reveal" style="--d:0.08s">
           <div class="video-slot">
             <div class="video-placeholder">
               <div class="ph-play" aria-hidden="true"></div>
@@ -1147,7 +1405,7 @@ section { position: relative; }
           <div class="card-glare" aria-hidden="true"></div>
         </article>
 
-        <article class="work-card reveal" data-tilt style="--d:0.16s">
+        <article class="work-card reveal" style="--d:0.16s">
           <div class="video-slot">
             <div class="video-placeholder">
               <div class="ph-play" aria-hidden="true"></div>
@@ -1158,7 +1416,7 @@ section { position: relative; }
           <div class="card-glare" aria-hidden="true"></div>
         </article>
 
-        <article class="work-card reveal" data-tilt style="--d:0s">
+        <article class="work-card reveal" style="--d:0s">
           <div class="video-slot">
             <div class="video-placeholder">
               <div class="ph-play" aria-hidden="true"></div>
@@ -1169,7 +1427,7 @@ section { position: relative; }
           <div class="card-glare" aria-hidden="true"></div>
         </article>
 
-        <article class="work-card reveal" data-tilt style="--d:0.08s">
+        <article class="work-card reveal" style="--d:0.08s">
           <div class="video-slot">
             <div class="video-placeholder">
               <div class="ph-play" aria-hidden="true"></div>
@@ -1180,7 +1438,7 @@ section { position: relative; }
           <div class="card-glare" aria-hidden="true"></div>
         </article>
 
-        <article class="work-card reveal" data-tilt style="--d:0.16s">
+        <article class="work-card reveal" style="--d:0.16s">
           <div class="video-slot">
             <div class="video-placeholder">
               <div class="ph-play" aria-hidden="true"></div>
@@ -1195,7 +1453,8 @@ section { position: relative; }
   </section>
 
   <!-- ============ SERVICES ============ -->
-  <section class="services section-pad" id="services">
+  <section class="services section-pad" id="services" data-scene="full">
+    <div class="scene-word" data-kx="6" aria-hidden="true">Craft</div>
     <div class="wrap">
       <span class="kicker reveal">Services</span>
       <h2 class="section-title reveal" style="--d:0.08s">What I edit</h2>
@@ -1257,8 +1516,13 @@ section { position: relative; }
     </div>
   </section>
 
+  <!-- kinetic type — act break 2 -->
+  <div class="kinetic" aria-hidden="true">
+    <div class="kinetic-line" data-kx="-9">Edit <i>—</i> color <i>—</i> sound <i>—</i> motion <i>—</i> edit <i>—</i> color <i>—</i> sound <i>—</i> motion <i>—</i> edit <i>—</i> color <i>—</i> sound <i>—</i> motion <i>—</i></div>
+  </div>
+
   <!-- ============ STATS ============ -->
-  <section class="stats section-pad" id="stats">
+  <section class="stats section-pad" id="stats" data-scene="full" style="padding-top:0">
     <div class="wrap">
       <div class="stats-row reveal">
         <div class="stat">
@@ -1278,7 +1542,8 @@ section { position: relative; }
   </section>
 
   <!-- ============ TESTIMONIALS ============ -->
-  <section class="section-pad" id="testimonials" style="padding-top:0">
+  <section class="testimonials section-pad" id="testimonials" data-scene="full" style="padding-top:0">
+    <div class="scene-word" data-kx="-7" style="top:auto;bottom:0" aria-hidden="true">Proof</div>
     <div class="wrap">
       <span class="kicker reveal">Testimonials</span>
       <h2 class="section-title reveal" style="--d:0.08s">What clients say</h2>
@@ -1326,9 +1591,15 @@ section { position: relative; }
     </div>
   </section>
 
+  <!-- kinetic type — act break 3 -->
+  <div class="kinetic" aria-hidden="true">
+    <div class="kinetic-line" data-kx="10">Let&rsquo;s <b>roll</b> <i>—</i> let&rsquo;s <b>roll</b> <i>—</i> let&rsquo;s <b>roll</b> <i>—</i> let&rsquo;s <b>roll</b> <i>—</i> let&rsquo;s <b>roll</b> <i>—</i> let&rsquo;s <b>roll</b> <i>—</i></div>
+  </div>
+
   <!-- ============ CONTACT ============ -->
-  <section class="contact section-pad" id="contact">
-    <div class="contact-glow" data-parallax="0.12" aria-hidden="true"></div>
+  <section class="contact section-pad" id="contact" data-scene>
+    <div class="scene-word" data-kx="6" aria-hidden="true">Action</div>
+    <div class="contact-glow" data-depth="0.5" aria-hidden="true"></div>
     <div class="wrap contact-inner">
       <span class="kicker reveal" style="justify-content:center">Contact</span>
       <h2 class="section-title reveal" style="--d:0.08s">Let’s cut something<br>worth watching.</h2>
@@ -1364,12 +1635,26 @@ section { position: relative; }
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.min.js"></script>
 <script>
 (function () {
   "use strict";
 
+  var docEl        = document.documentElement;
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var finePointer  = window.matchMedia("(pointer: fine)").matches;
+  var cinematic    = !reduceMotion && !!(window.gsap && window.ScrollTrigger);
+  var lenis        = null;
+
+  function q(s)  { return document.querySelector(s); }
+  function qa(s) { return [].slice.call(document.querySelectorAll(s)); }
+
+  // gsap-on flips the CSS into "GSAP owns every entrance" mode.
+  // It must happen before first paint (this script is parser-blocking).
+  if (cinematic) docEl.classList.add("gsap-on");
+  else if (!reduceMotion) docEl.classList.add("js");
 
   /* ---------- mobile nav ---------- */
   var burger = document.getElementById("navBurger");
@@ -1378,22 +1663,22 @@ section { position: relative; }
     var open = links.classList.toggle("open");
     burger.classList.toggle("open", open);
     burger.setAttribute("aria-expanded", open);
+    if (lenis) { open ? lenis.stop() : lenis.start(); }
   });
   links.addEventListener("click", function (e) {
     if (e.target.tagName === "A") {
       links.classList.remove("open");
       burger.classList.remove("open");
       burger.setAttribute("aria-expanded", "false");
+      if (lenis) lenis.start();
     }
   });
 
-  /* ---------- scroll-driven work: timeline bar, playhead,
-       timecode, nav state, parallax — one rAF loop ---------- */
-  var fill      = document.getElementById("timelineFill");
-  var playhead  = document.getElementById("playhead");
-  var timecode  = document.getElementById("timecode");
-  var nav       = document.getElementById("nav");
-  var parallaxEls = [].slice.call(document.querySelectorAll("[data-parallax]"));
+  /* ---------- timeline bar, playhead, timecode, nav state ---------- */
+  var fill     = document.getElementById("timelineFill");
+  var playhead = document.getElementById("playhead");
+  var timecode = document.getElementById("timecode");
+  var nav      = document.getElementById("nav");
   var vw = window.innerWidth, vh = window.innerHeight;
   var ticking = false;
 
@@ -1423,40 +1708,13 @@ section { position: relative; }
       timecode.textContent = "00:" + pad(Math.floor(s / 60)) + ":" + pad(s % 60) + ":" + pad(f);
 
       nav.classList.toggle("scrolled", y > 10);
-
-      if (!reduceMotion) {
-        for (var i = 0; i < parallaxEls.length; i++) {
-          var el = parallaxEls[i];
-          var speed = parseFloat(el.getAttribute("data-parallax")) || 0;
-          var rect = el.parentElement.getBoundingClientRect();
-          // offset relative to element's parent entering the viewport
-          var offset = (rect.top + rect.height / 2 - vh / 2) * -speed;
-          el.style.transform = "translate3d(0," + offset.toFixed(1) + "px,0)";
-        }
-      }
     });
   }
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 
-  /* ---------- scroll-reveal ---------- */
-  var revealEls = [].slice.call(document.querySelectorAll(".reveal"));
-  if ("IntersectionObserver" in window && !reduceMotion) {
-    var ro = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("in");
-          ro.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
-    revealEls.forEach(function (el) { ro.observe(el); });
-  } else {
-    revealEls.forEach(function (el) { el.classList.add("in"); });
-  }
-
   /* ---------- count-up stats ---------- */
-  var counters = [].slice.call(document.querySelectorAll("[data-count]"));
+  var counters = qa("[data-count]");
   function runCounter(el) {
     var target = parseInt(el.getAttribute("data-count"), 10);
     var dur = parseInt(el.getAttribute("data-duration"), 10) || 1800;
@@ -1506,8 +1764,8 @@ section { position: relative; }
   /* ---------- custom cursor glow (desktop only) ---------- */
   if (finePointer && !reduceMotion) {
     document.body.classList.add("has-custom-cursor");
-    var dot  = document.querySelector(".cursor-dot");
-    var halo = document.querySelector(".cursor-halo");
+    var dot  = q(".cursor-dot");
+    var halo = q(".cursor-halo");
     var mx = -100, my = -100, hx = -100, hy = -100, scale = 1;
     var cursorLive = false;
 
@@ -1539,45 +1797,20 @@ section { position: relative; }
     })();
   }
 
-  /* ---------- 3D tilt on work cards ---------- */
+  /* ---------- glare follows the pointer on work cards ---------- */
   if (finePointer && !reduceMotion) {
-    [].slice.call(document.querySelectorAll("[data-tilt]")).forEach(function (card) {
-      var rect = null, raf = null, px = 0, py = 0, hovering = false;
-
-      function apply() {
-        raf = null;
-        if (!hovering) return;
-        var rx = (0.5 - py) * 10;   // rotateX
-        var ry = (px - 0.5) * 12;   // rotateY
-        card.style.transform =
-          "perspective(900px) rotateX(" + rx.toFixed(2) + "deg) rotateY(" +
-          ry.toFixed(2) + "deg) translateZ(6px)";
-        card.style.setProperty("--gx", (px * 100).toFixed(1) + "%");
-        card.style.setProperty("--gy", (py * 100).toFixed(1) + "%");
-      }
-      card.addEventListener("mouseenter", function () {
-        hovering = true;
-        rect = card.getBoundingClientRect();
-        card.style.transition = "border-color 0.35s";
-      });
+    qa(".work-card").forEach(function (card) {
       card.addEventListener("mousemove", function (e) {
-        if (!rect) rect = card.getBoundingClientRect();
-        px = (e.clientX - rect.left) / rect.width;
-        py = (e.clientY - rect.top) / rect.height;
-        if (!raf) raf = requestAnimationFrame(apply);
-      });
-      card.addEventListener("mouseleave", function () {
-        hovering = false;
-        rect = null;
-        card.style.transition = "transform 0.6s cubic-bezier(0.16,1,0.3,1), border-color 0.35s";
-        card.style.transform = "perspective(900px) rotateX(0deg) rotateY(0deg) translateZ(0)";
+        var r = card.getBoundingClientRect();
+        card.style.setProperty("--gx", ((e.clientX - r.left) / r.width * 100).toFixed(1) + "%");
+        card.style.setProperty("--gy", ((e.clientY - r.top) / r.height * 100).toFixed(1) + "%");
       });
     });
   }
 
   /* ---------- magnetic buttons ---------- */
   if (finePointer && !reduceMotion) {
-    [].slice.call(document.querySelectorAll("[data-magnetic]")).forEach(function (btn) {
+    qa("[data-magnetic]").forEach(function (btn) {
       var rect = null, raf = null, tx = 0, ty = 0;
       function apply() {
         raf = null;
@@ -1600,6 +1833,253 @@ section { position: relative; }
         btn.style.transform = "translate3d(0,0,0)";
       });
     });
+  }
+
+  if (cinematic) initCinema();
+  else initFallback();
+
+  /* ============================================================
+     FALLBACK — no GSAP (CDN failed) or reduced motion:
+     plain IntersectionObserver reveals, everything readable
+     ============================================================ */
+  function initFallback() {
+    var revealEls = qa(".reveal");
+    if ("IntersectionObserver" in window && !reduceMotion) {
+      var ro = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in");
+            ro.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+      revealEls.forEach(function (el) { ro.observe(el); });
+    } else {
+      revealEls.forEach(function (el) { el.classList.add("in"); });
+    }
+  }
+
+  /* ============================================================
+     CINEMA — GSAP + ScrollTrigger (+ Lenis smooth scroll)
+     ============================================================ */
+  function initCinema() {
+    gsap.registerPlugin(ScrollTrigger);
+    ScrollTrigger.config({ ignoreMobileResize: true });
+
+    /* ----- Lenis smooth scroll, driven by GSAP's ticker ----- */
+    if (window.Lenis) {
+      lenis = new Lenis({ lerp: 0.09 });
+      lenis.on("scroll", ScrollTrigger.update);
+      gsap.ticker.add(function (time) { lenis.raf(time * 1000); });
+      gsap.ticker.lagSmoothing(0);
+    }
+
+    /* ----- anchor links glide with the same easing ----- */
+    qa('a[href^="#"]').forEach(function (a) {
+      a.addEventListener("click", function (e) {
+        if (!lenis) return;
+        var href = a.getAttribute("href");
+        var target = href.length > 1 && document.querySelector(href);
+        if (!target) return;
+        e.preventDefault();
+        // pinned work section wants its exact pin start; others clear the header
+        var off = (href === "#work" && window.innerWidth > 900) ? 0 : -96;
+        lenis.scrollTo(target, {
+          offset: off,
+          duration: 1.4,
+          easing: function (t) { return 1 - Math.pow(1 - t, 4); }
+        });
+      });
+    });
+
+    /* ----- opening title sequence: letterbox + camera push-in ----- */
+    // y:0 clears the CSS fallback translateY(115%) that GSAP parses as px
+    gsap.set(".hero-title .line > span", { yPercent: 115, y: 0, rotate: 2.5 });
+    gsap.set([".hero-badge", ".hero-sub", ".hero-actions", ".scroll-hint"], { autoAlpha: 0, y: 26 });
+    gsap.set(".hero-cam", { scale: 0.88, transformOrigin: "50% 42%" });
+
+    var intro = gsap.timeline({ defaults: { ease: "power3.inOut" } });
+    intro
+      .to(".cinema-title", { autoAlpha: 1, duration: 0.7, ease: "power2.out" }, 0.25)
+      .to(".cinema-title", { autoAlpha: 0, duration: 0.45, ease: "power2.in" }, 1.45)
+      // bars settle into a widescreen letterbox while the camera pushes in
+      .to(".cinema-top",    { scaleY: 0.22, duration: 1.05 }, 1.8)
+      .to(".cinema-bottom", { scaleY: 0.22, duration: 1.05 }, 1.8)
+      .to(".hero-cam", { scale: 1, duration: 2.8, ease: "power2.out" }, 1.85)
+      .to(".hero-title .line > span",
+          { yPercent: 0, rotate: 0, duration: 1.15, ease: "power4.out", stagger: 0.13 }, 2.0)
+      .to(".hero-badge", { autoAlpha: 1, y: 0, duration: 0.7, ease: "power3.out" }, 2.35)
+      // then the letterbox retracts fully and the page begins
+      .to([".cinema-top", ".cinema-bottom"], { scaleY: 0, duration: 0.9 }, 2.9)
+      .to(".hero-sub",     { autoAlpha: 1, y: 0, duration: 0.8, ease: "power3.out" }, 3.0)
+      .to(".hero-actions", { autoAlpha: 1, y: 0, duration: 0.8, ease: "power3.out" }, 3.2)
+      .to(".scroll-hint",  { autoAlpha: 1, y: 0, duration: 0.8, ease: "power3.out" }, 3.5)
+      .set(".cinema", { display: "none" });
+
+    // repeat visits in the same tab skip the studio card
+    try {
+      if (sessionStorage.getItem("introSeen")) intro.seek(1.8);
+      sessionStorage.setItem("introSeen", "1");
+    } catch (err) {}
+
+    // reloading mid-page, or scrolling early, fast-forwards the intro
+    if ((window.scrollY || 0) > window.innerHeight * 0.4) intro.progress(1);
+    function skipIntro() {
+      if (intro.progress() < 1 && (window.scrollY || 0) > 60) intro.progress(1);
+      if (intro.progress() >= 1) window.removeEventListener("scroll", skipIntro);
+    }
+    window.addEventListener("scroll", skipIntro, { passive: true });
+
+    /* ----- scroll-driven scenes, responsive ----- */
+    var mm = gsap.matchMedia();
+    mm.add({
+      desktop: "(min-width: 901px)",
+      mobile:  "(max-width: 900px)"
+    }, function (ctx) {
+      var desktop = ctx.conditions.desktop;
+      var F = desktop ? 1 : 0.5; // mobile gets the same moves at half strength
+
+      /* — hero: the camera travels through the headline on scroll — */
+      gsap.timeline({
+        defaults: { ease: "none" },
+        scrollTrigger: { trigger: "#hero", start: "top top", end: "bottom top", scrub: true }
+      })
+        .fromTo(".hero-cam", { scale: 1, yPercent: 0, autoAlpha: 1 },
+          { scale: desktop ? 1.32 : 1.14, yPercent: -12, autoAlpha: 0, immediateRender: false }, 0)
+        .to(".scroll-hint", { autoAlpha: 0 }, 0);
+
+      /* — featured work (created before the downstream scenes so the
+           pin's added scroll distance is compensated on refresh) — */
+      if (desktop) {
+        var track = q("#workTrack");
+        var stage = q(".work-stage");
+        var panDist = function () { return Math.max(0, track.scrollWidth - window.innerWidth); };
+
+        // dolly up to the stage before the pin engages
+        gsap.fromTo(stage,
+          { autoAlpha: 0, y: 90, scale: 0.96 },
+          { autoAlpha: 1, y: 0, scale: 1, ease: "none",
+            scrollTrigger: { trigger: "#work", start: "top 95%", end: "top 20%", scrub: true } });
+
+        var idxEl = q("#workIdx"), lastIdx = 0;
+        var barSet  = gsap.quickSetter("#workBar", "scaleX");
+        var headSet = gsap.quickSetter(".work-head", "x", "px");
+        var wordSet = gsap.quickSetter(".work-word", "x", "px");
+
+        // the pin: one long horizontal camera pan across all six cards
+        var pan = gsap.to(track, {
+          x: function () { return -panDist(); },
+          ease: "none",
+          scrollTrigger: {
+            trigger: "#work",
+            start: "top top",
+            end: function () { return "+=" + Math.round(panDist() + window.innerHeight * 0.35); },
+            scrub: 1,
+            pin: true,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+            onUpdate: function (self) {
+              var pr = self.progress;
+              barSet(pr);
+              headSet(-70 * pr);                          // header drifts slower: parallax
+              wordSet(-window.innerWidth * 0.45 * pr);    // giant word drifts slowest
+              var n = Math.min(6, 1 + Math.floor(pr * 6));
+              if (n !== lastIdx) { lastIdx = n; idxEl.textContent = "0" + n; }
+            }
+          }
+        });
+
+        // each card racks into focus as it crosses the frame
+        qa(".work-card").forEach(function (card) {
+          gsap.fromTo(card,
+            { scale: 0.9, autoAlpha: 0.35, rotateY: 5 },
+            { scale: 1, autoAlpha: 1, rotateY: 0, ease: "none",
+              scrollTrigger: { trigger: card, containerAnimation: pan,
+                               start: "left 105%", end: "left 55%", scrub: true } });
+          // the footage inside pans opposite the camera: parallax within the card
+          gsap.fromTo(card.querySelector(".video-slot"),
+            { xPercent: 5,  scale: 1.12 },
+            { xPercent: -5, scale: 1.12, ease: "none",
+              scrollTrigger: { trigger: card, containerAnimation: pan,
+                               start: "left 110%", end: "right -10%", scrub: true } });
+        });
+      } else {
+        gsap.fromTo(".work-head",
+          { autoAlpha: 0, y: 50 },
+          { autoAlpha: 1, y: 0, ease: "none",
+            scrollTrigger: { trigger: "#work", start: "top 92%", end: "top 55%", scrub: true } });
+        qa(".work-card").forEach(function (card) {
+          gsap.fromTo(card,
+            { autoAlpha: 0, y: 56, scale: 0.97 },
+            { autoAlpha: 1, y: 0, scale: 1, duration: 0.9, ease: "power3.out",
+              scrollTrigger: { trigger: card, start: "top 92%", toggleActions: "play none none reverse" } });
+        });
+      }
+
+      /* — kinetic type strips & giant scene words pan with scroll — */
+      qa("[data-kx]").forEach(function (el) {
+        var kx = (parseFloat(el.getAttribute("data-kx")) || 8) * F;
+        var strip = el.classList.contains("kinetic-line");
+        var trig = el.closest(".kinetic") || el.closest("section") || el;
+        gsap.fromTo(el,
+          { xPercent: kx,  scale: strip ? 0.94 : 1 },
+          { xPercent: -kx, scale: strip ? 1.05 : 1, ease: "none",
+            scrollTrigger: { trigger: trig, start: "clamp(top bottom)", end: "clamp(bottom top)", scrub: true } });
+      });
+
+      /* — depth layers: fore/background drift at different speeds — */
+      qa("[data-depth]").forEach(function (el) {
+        var d = parseFloat(el.getAttribute("data-depth")) || 0.2;
+        var sec = el.closest("section") || el;
+        gsap.fromTo(el,
+          { y: function () { return d * 140 * F; } },
+          { y: function () { return -d * 140 * F; }, ease: "none",
+            scrollTrigger: { trigger: sec, start: "clamp(top bottom)", end: "clamp(bottom top)",
+                             scrub: true, invalidateOnRefresh: true } });
+      });
+
+      /* — sections enter like dolly moves and exit like cuts — */
+      qa("[data-scene]").forEach(function (sec) {
+        var content = sec.querySelector(".wrap");
+        if (!content) return;
+        gsap.fromTo(content,
+          { autoAlpha: 0, y: 90 * F, scale: desktop ? 0.93 : 1 },
+          { autoAlpha: 1, y: 0, scale: 1, ease: "none",
+            scrollTrigger: { trigger: sec, start: "top 95%", end: "top 45%", scrub: true } });
+        if (desktop && sec.getAttribute("data-scene") === "full") {
+          gsap.fromTo(content,
+            { autoAlpha: 1, y: 0, scale: 1 },
+            { autoAlpha: 0, y: -70, scale: 1.05, ease: "none", immediateRender: false,
+              scrollTrigger: { trigger: sec, start: "bottom 42%", end: "bottom 8%", scrub: true } });
+        }
+      });
+
+      /* — kinetic section titles: slide + settle like a title card — */
+      qa(".section-title").forEach(function (t) {
+        var centered = !!t.closest(".contact");
+        gsap.fromTo(t,
+          { xPercent: (centered ? 0 : -7) * F, scale: 1 + 0.16 * F,
+            transformOrigin: centered ? "50% 100%" : "0% 100%" },
+          { xPercent: 0, scale: 1, ease: "none",
+            scrollTrigger: { trigger: t, start: "top 100%", end: "top 40%", scrub: true } });
+      });
+
+      /* — cards rise at staggered depths, like layers passing a lens — */
+      qa(".service-card, .quote-card").forEach(function (card) {
+        var i = [].indexOf.call(card.parentElement.children, card);
+        gsap.fromTo(card,
+          { y: (44 + (i % 3) * 46) * F },
+          { y: 0, ease: "none",
+            scrollTrigger: { trigger: card.parentElement, start: "top 100%", end: "top 40%", scrub: true } });
+      });
+
+    });
+
+    // make refresh compute trigger positions in document order, so the
+    // pinned section's added scroll distance offsets everything below it
+    ScrollTrigger.sort();
+
+    window.addEventListener("load", function () { ScrollTrigger.refresh(); });
   }
 })();
 </script>
