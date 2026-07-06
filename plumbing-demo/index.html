@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Texas Independent Plumbing Solutions — Serious Plumbing for the DFW Metroplex</title>
+<meta name="description" content="Texas Independent Plumbing Solutions — slab leak detection, sewer line repair, gas lines, water heaters and hydrostatic testing across the DFW Metroplex. Licensed & insured. Free on-site estimates. Call (817) 405-4179.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   TEXAS INDEPENDENT PLUMBING SOLUTIONS — cinematic one-pager
+   ============================================================ */
+:root{
+  --ink:        #060c17;
+  --navy:       #0a1628;
+  --navy-2:     #0f2038;
+  --navy-3:     #16304f;
+  --line:       rgba(146,180,222,.14);
+  --copper:     #e0762e;
+  --copper-2:   #f59e52;
+  --copper-deep:#b3541a;
+  --cream:      #f5efe6;
+  --mute:       #93a7c2;
+  --glow:       0 0 24px rgba(224,118,46,.55), 0 0 72px rgba(224,118,46,.28);
+  --font: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --pad: clamp(1.25rem, 4vw, 4rem);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+html.lenis, html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+body{
+  font-family:var(--font);
+  background:var(--ink);
+  color:var(--cream);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+::selection{background:var(--copper);color:var(--ink)}
+img,svg,video{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+button{font-family:inherit}
+
+/* ---------- type scale ---------- */
+.display{
+  font-weight:900;
+  font-stretch:110%;
+  text-transform:uppercase;
+  line-height:.92;
+  letter-spacing:-.015em;
+}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:.6rem;
+  font-size:.72rem;font-weight:700;letter-spacing:.32em;text-transform:uppercase;
+  color:var(--copper-2);
+}
+.eyebrow::before{content:"";width:2.2rem;height:1px;background:linear-gradient(90deg,transparent,var(--copper))}
+.section-title{font-size:clamp(2.2rem,6vw,4.6rem);margin:.7rem 0 1.1rem}
+.section-sub{color:var(--mute);max-width:38rem;font-size:clamp(.95rem,1.4vw,1.1rem)}
+
+/* ---------- shared section chrome ---------- */
+section{position:relative}
+.wrap{max-width:76rem;margin:0 auto;padding:clamp(4.5rem,10vh,8rem) var(--pad)}
+.grain::after{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.05;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E");
+}
+
+/* ============ NAV ============ */
+.nav{
+  position:fixed;inset:0 0 auto 0;z-index:80;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1rem var(--pad);
+  transition:background .45s ease,border-color .45s ease,padding .45s ease;
+  border-bottom:1px solid transparent;
+}
+.nav.scrolled{
+  background:rgba(6,12,23,.82);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom-color:var(--line);
+  padding:.65rem var(--pad);
+}
+.brand{display:flex;align-items:center;gap:.7rem}
+.brand-mark{
+  width:2.4rem;height:2.4rem;border-radius:.6rem;flex:none;
+  background:linear-gradient(135deg,var(--copper-2),var(--copper-deep));
+  display:grid;place-items:center;
+  box-shadow:0 4px 18px rgba(224,118,46,.35);
+}
+.brand-mark svg{width:1.3rem;height:1.3rem;fill:var(--ink)}
+.brand-name{font-size:.68rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;line-height:1.35}
+.brand-name b{display:block;color:var(--copper-2)}
+.nav-links{display:flex;gap:1.8rem;font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.nav-links a{color:var(--mute);transition:color .25s}
+.nav-links a:hover{color:var(--cream)}
+.nav-call{
+  display:inline-flex;align-items:center;gap:.55rem;
+  font-weight:800;font-size:.82rem;letter-spacing:.06em;
+  padding:.7rem 1.15rem;border-radius:999px;
+  color:var(--ink);
+  background:linear-gradient(135deg,var(--copper-2),var(--copper));
+  box-shadow:var(--glow);
+  transition:transform .25s ease,box-shadow .25s ease;
+}
+.nav-call:hover{transform:translateY(-2px);box-shadow:0 0 34px rgba(224,118,46,.75),0 0 90px rgba(224,118,46,.35)}
+@media (max-width:900px){.nav-links{display:none}}
+@media (max-width:560px){.nav-call span.num{display:none}}
+
+/* ============ HERO ============ */
+.hero{
+  position:relative;height:100svh;min-height:640px;
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  overflow:hidden;
+  /* fallback if the video never loads: deep cinematic gradient */
+  background:
+    radial-gradient(120% 90% at 70% 10%, #16304f 0%, transparent 55%),
+    radial-gradient(100% 80% at 20% 90%, #123 0%, transparent 60%),
+    linear-gradient(160deg,#0d1b30 0%, #060c17 70%);
+}
+.hero-media{position:absolute;inset:-6% -3%;z-index:0;will-change:transform}
+.hero-media video{
+  width:100%;height:100%;object-fit:cover;
+  filter:saturate(.85) contrast(1.08) brightness(.85);
+}
+.hero-caustics{ /* animated water shimmer behind/over the video, also carries the fallback */
+  position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:
+    radial-gradient(60% 45% at 30% 30%, rgba(35,84,140,.35), transparent 70%),
+    radial-gradient(50% 40% at 75% 65%, rgba(224,118,46,.14), transparent 70%);
+  animation:caustics 14s ease-in-out infinite alternate;
+  mix-blend-mode:screen;
+}
+@keyframes caustics{
+  from{transform:translate3d(-2%,-1%,0) scale(1)}
+  to  {transform:translate3d(2%,2%,0)  scale(1.08)}
+}
+.hero-shade{ /* dark overlay + vignette */
+  position:absolute;inset:0;z-index:2;
+  background:
+    linear-gradient(180deg, rgba(6,12,23,.72) 0%, rgba(6,12,23,.45) 40%, rgba(6,12,23,.92) 100%),
+    radial-gradient(120% 100% at 50% 50%, transparent 40%, rgba(6,12,23,.75) 100%);
+}
+.hero-inner{position:relative;z-index:3;padding:0 var(--pad);max-width:70rem;will-change:transform}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-size:.72rem;font-weight:800;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--copper-2);
+  border:1px solid rgba(245,158,82,.45);border-radius:999px;
+  padding:.55rem 1.1rem;margin-bottom:1.6rem;
+  background:rgba(224,118,46,.08);
+  backdrop-filter:blur(6px);
+}
+.hero-badge .dot{width:.5rem;height:.5rem;border-radius:50%;background:var(--copper-2);box-shadow:0 0 12px var(--copper-2);animation:pulse 2.2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.hero h1{
+  font-size:clamp(2.6rem,9vw,7.2rem);
+  margin-bottom:1.4rem;
+  text-shadow:0 8px 60px rgba(0,0,0,.6);
+}
+.hero h1 .copper{
+  color:var(--copper-2);
+  text-shadow:0 0 40px rgba(224,118,46,.45),0 8px 60px rgba(0,0,0,.6);
+}
+.hero h1 .line{display:block;overflow:hidden}
+.hero h1 .ch{display:inline-block;white-space:pre;will-change:transform,opacity,filter}
+.hero-sub{
+  color:#c8d5e8;max-width:34rem;margin:0 auto 2.4rem;
+  font-size:clamp(.98rem,1.6vw,1.18rem);font-weight:500;
+}
+.hero-cta{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;align-items:center}
+.btn-call{
+  position:relative;display:inline-flex;align-items:center;gap:.7rem;
+  font-size:clamp(1rem,2vw,1.2rem);font-weight:900;letter-spacing:.04em;
+  padding:1.05rem 2.1rem;border-radius:999px;color:var(--ink);
+  background:linear-gradient(135deg,var(--copper-2) 0%,var(--copper) 55%,var(--copper-deep) 130%);
+  box-shadow:var(--glow);
+  transition:transform .25s ease,box-shadow .25s ease;
+}
+.btn-call::after{ /* breathing glow ring */
+  content:"";position:absolute;inset:-4px;border-radius:999px;z-index:-1;
+  background:radial-gradient(closest-side,rgba(224,118,46,.55),transparent 75%);
+  filter:blur(12px);animation:breathe 2.6s ease-in-out infinite;
+}
+@keyframes breathe{0%,100%{opacity:.55;transform:scale(1)}50%{opacity:1;transform:scale(1.06)}}
+.btn-call:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 0 40px rgba(224,118,46,.8),0 0 110px rgba(224,118,46,.4)}
+.btn-call svg{width:1.2em;height:1.2em;fill:currentColor}
+.btn-ghost{
+  display:inline-flex;align-items:center;gap:.6rem;
+  font-size:.92rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  padding:1rem 1.7rem;border-radius:999px;color:var(--cream);
+  border:1px solid rgba(245,239,230,.3);
+  transition:border-color .25s,background .25s,transform .25s;
+  backdrop-filter:blur(6px);
+}
+.btn-ghost:hover{border-color:var(--copper-2);background:rgba(224,118,46,.1);transform:translateY(-2px)}
+.hero-scrollcue{
+  position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);z-index:3;
+  display:flex;flex-direction:column;align-items:center;gap:.5rem;
+  font-size:.62rem;font-weight:700;letter-spacing:.34em;text-transform:uppercase;color:var(--mute);
+}
+.hero-scrollcue .stem{width:1px;height:3rem;background:linear-gradient(180deg,var(--copper-2),transparent);animation:drip 1.8s ease-in-out infinite}
+@keyframes drip{0%{transform:scaleY(0);transform-origin:top}55%{transform:scaleY(1);transform-origin:top}56%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* ============ MARQUEE TRUST STRIP ============ */
+.strip{
+  border-block:1px solid var(--line);
+  background:linear-gradient(90deg,rgba(224,118,46,.06),rgba(224,118,46,.02));
+  overflow:hidden;padding:1.1rem 0;position:relative;z-index:4;
+}
+.strip-track{display:flex;gap:3.5rem;width:max-content;animation:marquee 30s linear infinite}
+.strip:hover .strip-track{animation-play-state:paused}
+.strip-item{
+  display:flex;align-items:center;gap:.7rem;white-space:nowrap;
+  font-size:.78rem;font-weight:800;letter-spacing:.24em;text-transform:uppercase;color:var(--mute);
+}
+.strip-item svg{width:1rem;height:1rem;fill:var(--copper);flex:none}
+@keyframes marquee{to{transform:translateX(-50%)}}
+
+/* ============ SERVICES ============ */
+.services{background:linear-gradient(180deg,var(--ink) 0%,var(--navy) 60%,var(--ink) 100%)}
+.svc-grid{
+  display:grid;gap:1.4rem;margin-top:3rem;
+  grid-template-columns:repeat(auto-fit,minmax(17rem,1fr));
+  perspective:1400px;
+}
+.svc-card{
+  position:relative;border-radius:1.1rem;padding:2rem 1.7rem 1.9rem;
+  background:linear-gradient(160deg,rgba(22,48,79,.55),rgba(10,22,40,.9));
+  border:1px solid var(--line);
+  transform-style:preserve-3d;
+  transition:border-color .3s ease,box-shadow .3s ease;
+  will-change:transform;
+  overflow:hidden;
+}
+.svc-card::before{ /* moving glare */
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:radial-gradient(30rem circle at var(--mx,50%) var(--my,50%),rgba(245,158,82,.14),transparent 45%);
+  opacity:0;transition:opacity .35s;
+}
+.svc-card:hover{border-color:rgba(224,118,46,.55);box-shadow:0 22px 60px rgba(0,0,0,.5),0 0 0 1px rgba(224,118,46,.15)}
+.svc-card:hover::before{opacity:1}
+.svc-icon{
+  width:3.2rem;height:3.2rem;border-radius:.85rem;margin-bottom:1.4rem;
+  display:grid;place-items:center;
+  background:linear-gradient(135deg,rgba(224,118,46,.25),rgba(224,118,46,.06));
+  border:1px solid rgba(224,118,46,.35);
+  transform:translateZ(46px);
+}
+.svc-icon svg{width:1.55rem;height:1.55rem;stroke:var(--copper-2);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.svc-card h3{
+  font-size:1.22rem;font-weight:800;text-transform:uppercase;letter-spacing:.03em;
+  line-height:1.2;margin-bottom:.6rem;transform:translateZ(36px);
+}
+.svc-card p{color:var(--mute);font-size:.92rem;transform:translateZ(24px)}
+.svc-num{
+  position:absolute;top:1.2rem;right:1.4rem;
+  font-weight:900;font-size:.8rem;letter-spacing:.2em;color:rgba(147,167,194,.4);
+  transform:translateZ(30px);
+}
+.svc-card .svc-link{
+  display:inline-flex;align-items:center;gap:.45rem;margin-top:1.3rem;
+  font-size:.74rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--copper-2);
+  transform:translateZ(30px);
+}
+.svc-card .svc-link::after{content:"→";transition:transform .3s}
+.svc-card:hover .svc-link::after{transform:translateX(.35rem)}
+
+/* ============ STATS ============ */
+.stats{
+  background:
+    radial-gradient(90% 120% at 50% -20%, rgba(224,118,46,.14), transparent 55%),
+    var(--navy);
+  border-block:1px solid var(--line);
+}
+.stats-grid{display:grid;gap:2.5rem 1.5rem;grid-template-columns:repeat(auto-fit,minmax(11rem,1fr));text-align:center}
+.stat-num{
+  font-weight:900;font-stretch:105%;line-height:1;
+  font-size:clamp(3rem,7vw,5.2rem);
+  color:var(--copper-2);
+  text-shadow:0 0 34px rgba(224,118,46,.35);
+  font-variant-numeric:tabular-nums;
+}
+.stat-num .aux{font-size:.5em;vertical-align:.6em}
+.stat-label{
+  margin-top:.7rem;font-size:.74rem;font-weight:800;
+  letter-spacing:.26em;text-transform:uppercase;color:var(--mute);
+}
+
+/* ============ WHY / KINETIC ============ */
+.why{background:var(--ink);overflow:hidden}
+.kinetic{
+  min-height:100svh;display:flex;flex-direction:column;justify-content:center;
+  padding:0 var(--pad);
+}
+.kinetic-word{
+  font-weight:900;font-stretch:118%;text-transform:uppercase;line-height:.95;
+  font-size:clamp(3.2rem,11.5vw,10rem);letter-spacing:-.02em;
+  color:var(--cream);will-change:transform,opacity;
+}
+.kinetic-word:nth-child(2){color:transparent;-webkit-text-stroke:2px var(--copper);paint-order:stroke}
+.kinetic-word:nth-child(3){color:var(--copper-2)}
+.why-body{display:grid;gap:2.5rem;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));margin-top:1rem}
+.why-item{border-top:2px solid rgba(224,118,46,.5);padding-top:1.2rem}
+.why-item h4{font-size:1rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem}
+.why-item p{color:var(--mute);font-size:.92rem}
+
+/* giant scrubbed word behind sections */
+.ghost-word{
+  position:absolute;top:50%;left:0;transform:translateY(-50%);
+  font-weight:900;font-stretch:125%;text-transform:uppercase;white-space:nowrap;
+  font-size:clamp(8rem,26vw,22rem);line-height:1;
+  color:transparent;-webkit-text-stroke:1px rgba(146,180,222,.12);
+  pointer-events:none;user-select:none;z-index:0;will-change:transform;
+}
+
+/* ============ TESTIMONIALS ============ */
+.testi{background:linear-gradient(180deg,var(--ink),var(--navy-2) 50%,var(--ink));overflow:hidden}
+.testi .wrap{padding-bottom:2rem}
+.testi-rail{display:flex;gap:1.4rem;padding:2.5rem var(--pad) 5rem;width:max-content}
+.testi-card{
+  width:clamp(19rem,38vw,26rem);flex:none;
+  background:linear-gradient(165deg,rgba(22,48,79,.5),rgba(8,16,30,.92));
+  border:1px solid var(--line);border-radius:1.2rem;
+  padding:2.2rem 2rem;position:relative;
+  transition:border-color .3s;
+}
+.testi-card:hover{border-color:rgba(224,118,46,.45)}
+.testi-card .q{
+  position:absolute;top:1.1rem;right:1.4rem;font-size:4.4rem;line-height:1;
+  font-weight:900;color:rgba(224,118,46,.22);
+}
+.testi-stars{color:var(--copper-2);letter-spacing:.24em;font-size:.85rem;margin-bottom:1rem;text-shadow:0 0 14px rgba(224,118,46,.5)}
+.testi-card blockquote{font-size:1.02rem;font-weight:500;color:#dbe4f0;margin-bottom:1.4rem}
+.testi-who{display:flex;align-items:center;gap:.8rem}
+.testi-ava{
+  width:2.6rem;height:2.6rem;border-radius:50%;flex:none;display:grid;place-items:center;
+  font-weight:900;font-size:.85rem;color:var(--ink);
+  background:linear-gradient(135deg,var(--copper-2),var(--copper-deep));
+}
+.testi-who .name{font-weight:800;font-size:.9rem}
+.testi-who .loc{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
+@media (max-width:899px){
+  .testi-rail{width:auto;flex-direction:column;padding:2rem var(--pad) 3rem}
+  .testi-card{width:100%}
+}
+
+/* ============ SERVICE AREA ============ */
+.area{background:var(--ink)}
+.area-grid{display:grid;gap:3rem;grid-template-columns:1fr;align-items:center;margin-top:2.5rem}
+@media(min-width:900px){.area-grid{grid-template-columns:1fr 1.1fr}}
+.radar{position:relative;aspect-ratio:1;max-width:26rem;margin:0 auto;width:100%}
+.radar .ring{
+  position:absolute;inset:0;border-radius:50%;
+  border:1px solid rgba(224,118,46,.25);
+}
+.radar .ring:nth-child(2){inset:16%}
+.radar .ring:nth-child(3){inset:32%}
+.radar .core{
+  position:absolute;inset:46%;border-radius:50%;
+  background:var(--copper-2);box-shadow:0 0 30px rgba(224,118,46,.9);
+}
+.radar .sweep{
+  position:absolute;inset:0;border-radius:50%;
+  background:conic-gradient(from 0deg,rgba(224,118,46,.32),transparent 22%);
+  animation:sweep 5s linear infinite;
+  -webkit-mask:radial-gradient(circle,transparent 8%,#000 9%);mask:radial-gradient(circle,transparent 8%,#000 9%);
+}
+@keyframes sweep{to{transform:rotate(360deg)}}
+.radar .ping{
+  position:absolute;inset:44%;border-radius:50%;border:2px solid var(--copper-2);
+  animation:ping 2.4s ease-out infinite;
+}
+@keyframes ping{from{transform:scale(1);opacity:.9}to{transform:scale(5.4);opacity:0}}
+.radar .tag{
+  position:absolute;font-size:.62rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--mute);
+}
+.radar .tag.dfw{top:50%;left:50%;transform:translate(-50%,-190%);color:var(--copper-2);font-size:.72rem}
+.city-cloud{display:flex;flex-wrap:wrap;gap:.6rem}
+.city{
+  font-size:.78rem;font-weight:700;letter-spacing:.08em;
+  padding:.55rem 1rem;border-radius:999px;
+  border:1px solid var(--line);color:#c4d2e6;
+  background:rgba(22,48,79,.35);
+  transition:border-color .25s,color .25s,background .25s,transform .25s;
+}
+.city:hover{border-color:var(--copper);color:var(--copper-2);background:rgba(224,118,46,.1);transform:translateY(-2px)}
+
+/* ============ CTA / FOOTER ============ */
+.cta{
+  background:
+    radial-gradient(100% 140% at 50% 120%, rgba(224,118,46,.28), transparent 60%),
+    var(--navy);
+  border-top:1px solid var(--line);
+  text-align:center;
+}
+.cta .big-phone{
+  display:inline-block;
+  font-size:clamp(2.2rem,8vw,6rem);
+  font-weight:900;font-stretch:110%;line-height:1;letter-spacing:-.01em;
+  color:var(--cream);margin:1.2rem 0 .6rem;
+  transition:color .3s,text-shadow .3s;
+}
+.cta .big-phone:hover{color:var(--copper-2);text-shadow:0 0 50px rgba(224,118,46,.55)}
+.cta .email{color:var(--mute);font-weight:600;letter-spacing:.04em}
+.cta .email a{color:var(--copper-2);border-bottom:1px solid rgba(224,118,46,.4)}
+.badges{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;margin-top:2.6rem}
+.badge{
+  display:inline-flex;align-items:center;gap:.6rem;
+  font-size:.72rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;
+  border:1px solid rgba(224,118,46,.4);border-radius:999px;
+  padding:.7rem 1.3rem;color:var(--copper-2);
+  background:rgba(224,118,46,.07);
+}
+.badge svg{width:1rem;height:1rem;fill:var(--copper-2)}
+footer{
+  background:var(--ink);border-top:1px solid var(--line);
+  padding:2.4rem var(--pad) calc(2.4rem + 4.5rem); /* clears the mobile call bar */
+  text-align:center;color:var(--mute);font-size:.8rem;
+}
+@media(min-width:769px){footer{padding-bottom:2.4rem}}
+footer .fine{margin-top:.5rem;font-size:.7rem;letter-spacing:.1em;opacity:.7}
+
+/* ============ STICKY MOBILE CALL BAR ============ */
+.callbar{
+  position:fixed;left:0;right:0;bottom:0;z-index:90;
+  display:none;grid-template-columns:1fr 1fr;
+  border-top:1px solid rgba(224,118,46,.4);
+  background:rgba(6,12,23,.9);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  padding:.7rem .8rem calc(.7rem + env(safe-area-inset-bottom));gap:.7rem;
+}
+.callbar a{
+  display:flex;align-items:center;justify-content:center;gap:.5rem;
+  font-size:.85rem;font-weight:900;letter-spacing:.04em;
+  padding:.85rem .5rem;border-radius:.7rem;
+}
+.callbar .cb-call{color:var(--ink);background:linear-gradient(135deg,var(--copper-2),var(--copper));box-shadow:0 0 20px rgba(224,118,46,.5)}
+.callbar .cb-est{color:var(--cream);border:1px solid rgba(245,239,230,.3)}
+.callbar svg{width:1.05rem;height:1.05rem;fill:currentColor;flex:none}
+@media(max-width:768px){.callbar{display:grid}}
+
+/* ---------- reveal defaults (JS animates these in) ---------- */
+.reveal{opacity:0;transform:translateY(46px)}
+.no-js .reveal, .reduced .reveal{opacity:1;transform:none}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body class="no-js">
+<script>document.body.classList.remove('no-js')</script>
+
+<!-- ================= NAV ================= -->
+<header class="nav" id="nav">
+  <a class="brand" href="#top" aria-label="Texas Independent Plumbing Solutions — home">
+    <span class="brand-mark" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M12 2C12 2 5.5 9.6 5.5 14.2a6.5 6.5 0 0 0 13 0C18.5 9.6 12 2 12 2Zm0 16.4a4.2 4.2 0 0 1-4.2-4.2c0-.4.06-.9.2-1.4h8a5 5 0 0 1 .2 1.4A4.2 4.2 0 0 1 12 18.4Z"/></svg>
+    </span>
+    <span class="brand-name">Texas Independent<b>Plumbing Solutions</b></span>
+  </a>
+  <nav class="nav-links" aria-label="Primary">
+    <a href="#services">Services</a>
+    <a href="#why">Why Us</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#area">Service Area</a>
+  </nav>
+  <a class="nav-call" href="tel:+18174054179">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.5 15.5 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.7.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.8 21 3 13.2 3 3.9c0-.5.4-1 1-1h3.4c.5 0 1 .5 1 1 0 1.3.2 2.5.6 3.7.1.4 0 .8-.3 1l-2.1 2.2Z"/></svg>
+    <span class="num">(817) 405-4179</span><span aria-hidden="true">Call Now</span>
+  </a>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="top">
+  <div class="hero-media" id="heroMedia" aria-hidden="true">
+    <video id="heroVideo" autoplay muted loop playsinline preload="metadata"
+           poster="data:image/gif;base64,R0lGODlhAQABAIAAAAYMFwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==">
+      <source src="https://videos.pexels.com/video-files/1093662/1093662-hd_1920_1080_30fps.mp4" type="video/mp4">
+      <source src="https://videos.pexels.com/video-files/2098989/2098989-hd_1920_1080_30fps.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="hero-caustics" aria-hidden="true"></div>
+  <div class="hero-shade" aria-hidden="true"></div>
+
+  <div class="hero-inner" id="heroInner">
+    <span class="hero-badge"><span class="dot"></span> Free On-Site Estimates</span>
+    <h1 class="display" id="heroTitle">
+      <span class="line">Plumbing done</span>
+      <span class="line copper">the Texas way.</span>
+    </h1>
+    <p class="hero-sub reveal" data-hero>Slab leaks. Sewer lines. Gas. Water heaters. One independent crew serving the entire DFW Metroplex — licensed, insured, and backed by a 1-year free warranty.</p>
+    <div class="hero-cta reveal" data-hero>
+      <a class="btn-call" href="tel:+18174054179">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.5 15.5 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.7.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.8 21 3 13.2 3 3.9c0-.5.4-1 1-1h3.4c.5 0 1 .5 1 1 0 1.3.2 2.5.6 3.7.1.4 0 .8-.3 1l-2.1 2.2Z"/></svg>
+        Call (817) 405-4179
+      </a>
+      <a class="btn-ghost" href="#services">Explore Services</a>
+    </div>
+  </div>
+
+  <div class="hero-scrollcue" aria-hidden="true"><span>Scroll</span><span class="stem"></span></div>
+</section>
+
+<!-- ================= TRUST STRIP ================= -->
+<div class="strip" aria-hidden="true">
+  <div class="strip-track" id="stripTrack">
+    <!-- duplicated once in JS for a seamless loop -->
+    <span class="strip-item"><svg viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.4 9.7 8 11 4.6-1.3 8-6 8-11V5l-8-3Zm-1.2 13.6-3-3 1.4-1.4 1.6 1.6 4-4 1.4 1.4-5.4 5.4Z"/></svg>Licensed &amp; Insured</span>
+    <span class="strip-item"><svg viewBox="0 0 24 24"><path d="m12 1 2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 16.2 5.9 19.6l1.4-6.8L2.2 8.1l6.9-.8L12 1Z"/></svg>Master Plumber</span>
+    <span class="strip-item"><svg viewBox="0 0 24 24"><path d="M12 22a10 10 0 1 1 10-10 10 10 0 0 1-10 10Zm1-10.4V6h-2v7l5.2 3.1 1-1.7-4.2-2.8Z"/></svg>25+ Years Experience</span>
+    <span class="strip-item"><svg viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.4 9.7 8 11 4.6-1.3 8-6 8-11V5l-8-3Z"/></svg>1-Year Free Warranty</span>
+    <span class="strip-item"><svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.9-9.3-9.6C1.2 7.6 3.6 4.5 6.9 4.5c1.9 0 3.7 1 5.1 2.7 1.4-1.7 3.2-2.7 5.1-2.7 3.3 0 5.7 3.1 4.2 6.9C19.5 16.1 12 21 12 21Z"/></svg>100% Satisfaction Guarantee</span>
+    <span class="strip-item"><svg viewBox="0 0 24 24"><path d="M20 8h-3V4H3a1 1 0 0 0-1 1v11h2a3 3 0 0 0 6 0h4a3 3 0 0 0 6 0h2v-5l-2-3ZM7 17.5A1.5 1.5 0 1 1 8.5 16 1.5 1.5 0 0 1 7 17.5Zm10 0A1.5 1.5 0 1 1 18.5 16 1.5 1.5 0 0 1 17 17.5Z"/></svg>Serving the DFW Metroplex</span>
+  </div>
+</div>
+
+<!-- ================= SERVICES ================= -->
+<section class="services grain" id="services">
+  <div class="ghost-word" data-ghost>Service</div>
+  <div class="wrap" style="position:relative;z-index:1">
+    <span class="eyebrow reveal">What we do</span>
+    <h2 class="display section-title reveal">Built for the<br>hard jobs.</h2>
+    <p class="section-sub reveal">From under-slab leaks to full commercial repipes — diagnosed with precision, repaired once, warrantied in writing.</p>
+
+    <div class="svc-grid">
+      <article class="svc-card reveal" data-tilt>
+        <span class="svc-num">01</span>
+        <span class="svc-icon"><svg viewBox="0 0 24 24"><path d="M4 20h16M6 20V10l6-6 6 6v10"/><circle cx="12" cy="13" r="2.5"/><path d="M12 15.5V18"/></svg></span>
+        <h3>Slab Leak Detection &amp; Repair</h3>
+        <p>Electronic leak location pinpoints the problem under your foundation — then we repair or reroute with minimal demolition, including under-slab tunneling.</p>
+        <span class="svc-link">Free estimate</span>
+      </article>
+
+      <article class="svc-card reveal" data-tilt>
+        <span class="svc-num">02</span>
+        <span class="svc-icon"><svg viewBox="0 0 24 24"><path d="M3 15c3-1 4-4 6-4s3 3 6 3 4-2 6-3"/><path d="M3 20c3-1 4-4 6-4s3 3 6 3 4-2 6-3"/><path d="M8 4h8v4H8z"/><path d="M12 8v3"/></svg></span>
+        <h3>Sewer Line Repair</h3>
+        <p>Camera inspection, hydro-jetting, spot repairs and full line replacement. We find the break, show you the footage, and fix it right the first time.</p>
+        <span class="svc-link">Free estimate</span>
+      </article>
+
+      <article class="svc-card reveal" data-tilt>
+        <span class="svc-num">03</span>
+        <span class="svc-icon"><svg viewBox="0 0 24 24"><path d="M12 3c-3 3.5-5 6-5 9a5 5 0 0 0 10 0c0-3-2-5.5-5-9Z"/><path d="M12 21v-4"/></svg></span>
+        <h3>Gas Line Repair &amp; Installation</h3>
+        <p>Leak testing, code-compliant repairs, and new gas lines for ranges, dryers, generators and outdoor kitchens — installed safely by licensed pros.</p>
+        <span class="svc-link">Free estimate</span>
+      </article>
+
+      <article class="svc-card reveal" data-tilt>
+        <span class="svc-num">04</span>
+        <span class="svc-icon"><svg viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="15" rx="3"/><path d="M10 21h4M12 18v3M10 8c.8 1 .8 2 0 3M14 8c.8 1 .8 2 0 3"/></svg></span>
+        <h3>Water Heaters</h3>
+        <p>Tank and tankless — repair, replacement and new installs sized to your home, with straightforward pricing and same-week scheduling.</p>
+        <span class="svc-link">Free estimate</span>
+      </article>
+
+      <article class="svc-card reveal" data-tilt>
+        <span class="svc-num">05</span>
+        <span class="svc-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/></svg></span>
+        <h3>Hydrostatic Leak Testing</h3>
+        <p>Pressure-test your drain system to confirm — or rule out — leaks under the slab. Essential for real-estate closings and foundation work.</p>
+        <span class="svc-link">Free estimate</span>
+      </article>
+
+      <article class="svc-card reveal" data-tilt>
+        <span class="svc-num">06</span>
+        <span class="svc-icon"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V7l5-4v18M14 21V10l5 3v8"/><path d="M8 9h.01M8 12h.01M8 15h.01"/></svg></span>
+        <h3>Commercial &amp; Multifamily</h3>
+        <p>Apartment communities, restaurants, retail and property portfolios — responsive service plumbing with documentation your managers will love.</p>
+        <span class="svc-link">Free estimate</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STATS ================= -->
+<section class="stats">
+  <div class="wrap">
+    <div class="stats-grid">
+      <div class="reveal">
+        <div class="stat-num"><span data-count="25" data-dur="2">0</span><span class="aux">+</span></div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="reveal">
+        <div class="stat-num"><span data-count="1" data-dur="1.2">0</span><span class="aux">yr</span></div>
+        <div class="stat-label">Free Warranty</div>
+      </div>
+      <div class="reveal">
+        <div class="stat-num"><span data-count="100" data-dur="2.2">0</span><span class="aux">%</span></div>
+        <div class="stat-label">Satisfaction Guarantee</div>
+      </div>
+      <div class="reveal">
+        <div class="stat-num"><span class="aux">$</span><span data-count="0" data-from="249" data-dur="2.4">249</span></div>
+        <div class="stat-label">On-Site Estimates. Always Free.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WHY / KINETIC ================= -->
+<section class="why" id="why">
+  <div class="kinetic" id="kinetic" aria-label="Independent. Accountable. Texas proud.">
+    <div class="kinetic-word">Independent.</div>
+    <div class="kinetic-word">Accountable.</div>
+    <div class="kinetic-word">Texas&nbsp;proud.</div>
+  </div>
+  <div class="wrap" style="padding-top:0">
+    <span class="eyebrow reveal">Why choose us</span>
+    <h2 class="display section-title reveal">No franchise.<br>No middleman.<br>No excuses.</h2>
+    <div class="why-body">
+      <div class="why-item reveal">
+        <h4>The owner answers for the work</h4>
+        <p>We're independent by design. The name on the truck is the name that stands behind every fitting, weld and slab repair we touch.</p>
+      </div>
+      <div class="why-item reveal">
+        <h4>Diagnose first, quote in writing</h4>
+        <p>Electronic leak detection, camera inspection and hydrostatic testing before we ever quote — so you pay for the fix, not the guesswork.</p>
+      </div>
+      <div class="why-item reveal">
+        <h4>Warrantied. Guaranteed.</h4>
+        <p>Every job carries a 1-year free warranty and a 100% satisfaction guarantee. If it's not right, we come back until it is.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TESTIMONIALS ================= -->
+<section class="testi" id="reviews">
+  <div class="ghost-word" data-ghost>Reviews</div>
+  <div class="wrap" style="position:relative;z-index:1">
+    <span class="eyebrow reveal">Word travels fast in Texas</span>
+    <h2 class="display section-title reveal">Neighbors talk.<br>Here's what they say.</h2>
+  </div>
+  <div class="testi-rail" id="testiRail">
+    <article class="testi-card reveal">
+      <span class="q" aria-hidden="true">"</span>
+      <div class="testi-stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <blockquote>They found a slab leak two other companies missed, tunneled under the foundation, and left my yard looking untouched. Worth every penny.</blockquote>
+      <div class="testi-who"><span class="testi-ava" aria-hidden="true">MR</span><div><div class="name">Maria R.</div><div class="loc">Fort Worth, TX</div></div></div>
+    </article>
+    <article class="testi-card reveal">
+      <span class="q" aria-hidden="true">"</span>
+      <div class="testi-stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <blockquote>Sewer line collapsed on a Friday. They had a camera in it that afternoon, showed me exactly what broke, and had us flowing by Sunday.</blockquote>
+      <div class="testi-who"><span class="testi-ava" aria-hidden="true">DK</span><div><div class="name">Daniel K.</div><div class="loc">Arlington, TX</div></div></div>
+    </article>
+    <article class="testi-card reveal">
+      <span class="q" aria-hidden="true">"</span>
+      <div class="testi-stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <blockquote>We manage 340 units across Dallas. TIPS is the only plumbing vendor whose paperwork is as clean as their work. Fast, documented, done.</blockquote>
+      <div class="testi-who"><span class="testi-ava" aria-hidden="true">SP</span><div><div class="name">Sandra P.</div><div class="loc">Property Manager · Dallas, TX</div></div></div>
+    </article>
+    <article class="testi-card reveal">
+      <span class="q" aria-hidden="true">"</span>
+      <div class="testi-stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <blockquote>Free estimate, honest options, no upsell. New tankless heater installed in a day and the garage is cleaner than they found it.</blockquote>
+      <div class="testi-who"><span class="testi-ava" aria-hidden="true">JT</span><div><div class="name">James T.</div><div class="loc">Keller, TX</div></div></div>
+    </article>
+  </div>
+</section>
+
+<!-- ================= SERVICE AREA ================= -->
+<section class="area grain" id="area">
+  <div class="wrap">
+    <span class="eyebrow reveal">Service area</span>
+    <h2 class="display section-title reveal">The whole Metroplex.<br>One phone call.</h2>
+    <p class="section-sub reveal">Based in the heart of DFW, we roll out across Tarrant, Dallas, Denton and Collin counties — usually the same day you call.</p>
+
+    <div class="area-grid">
+      <div class="radar reveal" aria-hidden="true">
+        <span class="ring"></span><span class="ring"></span><span class="ring"></span>
+        <span class="sweep"></span><span class="ping"></span><span class="core"></span>
+        <span class="tag dfw">DFW</span>
+        <span class="tag" style="top:6%;left:50%;transform:translateX(-50%)">Denton</span>
+        <span class="tag" style="top:50%;right:2%;transform:translateY(-50%)">Dallas</span>
+        <span class="tag" style="bottom:6%;left:50%;transform:translateX(-50%)">Mansfield</span>
+        <span class="tag" style="top:50%;left:2%;transform:translateY(-50%)">Fort Worth</span>
+      </div>
+      <ul class="city-cloud" id="cityCloud">
+        <li class="city">Fort Worth</li><li class="city">Dallas</li><li class="city">Arlington</li>
+        <li class="city">Plano</li><li class="city">Irving</li><li class="city">Frisco</li>
+        <li class="city">Grand Prairie</li><li class="city">McKinney</li><li class="city">Denton</li>
+        <li class="city">Carrollton</li><li class="city">Richardson</li><li class="city">Lewisville</li>
+        <li class="city">Keller</li><li class="city">Southlake</li><li class="city">Grapevine</li>
+        <li class="city">Mansfield</li><li class="city">Euless</li><li class="city">Bedford</li>
+        <li class="city">Hurst</li><li class="city">Flower Mound</li><li class="city">N. Richland Hills</li>
+        <li class="city">Burleson</li><li class="city">Weatherford</li><li class="city">+ Surrounding DFW</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA ================= -->
+<section class="cta">
+  <div class="wrap">
+    <span class="eyebrow reveal" style="justify-content:center">Free on-site estimates · 7 days a week</span>
+    <h2 class="display section-title reveal">Water doesn't wait.<br>Neither do we.</h2>
+    <a class="big-phone reveal" href="tel:+18174054179">(817) 405-4179</a>
+    <p class="email reveal">or email <a href="mailto:contact@tips.plumbing">contact@tips.plumbing</a></p>
+    <div class="badges">
+      <span class="badge reveal"><svg viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.4 9.7 8 11 4.6-1.3 8-6 8-11V5l-8-3Zm-1.2 13.6-3-3 1.4-1.4 1.6 1.6 4-4 1.4 1.4-5.4 5.4Z"/></svg>Licensed &amp; Insured</span>
+      <span class="badge reveal"><svg viewBox="0 0 24 24"><path d="m12 1 2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 16.2 5.9 19.6l1.4-6.8L2.2 8.1l6.9-.8L12 1Z"/></svg>Master Plumber</span>
+      <span class="badge reveal"><svg viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.4 9.7 8 11 4.6-1.3 8-6 8-11V5l-8-3Z"/></svg>1-Year Free Warranty</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p><strong>Texas Independent Plumbing Solutions</strong> · Serving the DFW Metroplex, Texas</p>
+  <p><a href="tel:+18174054179">(817) 405-4179</a> · <a href="mailto:contact@tips.plumbing">contact@tips.plumbing</a></p>
+  <p class="fine">Licensed &amp; Insured · Texas Master Plumber · © <span id="yr"></span> Texas Independent Plumbing Solutions. All rights reserved.</p>
+</footer>
+
+<!-- ================= STICKY MOBILE CALL BAR ================= -->
+<div class="callbar" role="navigation" aria-label="Quick contact">
+  <a class="cb-call" href="tel:+18174054179">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.5 15.5 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.7.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.8 21 3 13.2 3 3.9c0-.5.4-1 1-1h3.4c.5 0 1 .5 1 1 0 1.3.2 2.5.6 3.7.1.4 0 .8-.3 1l-2.1 2.2Z"/></svg>
+    Call Now
+  </a>
+  <a class="cb-est" href="mailto:contact@tips.plumbing?subject=Free%20Estimate%20Request">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5-8-5V6l8 5 8-5v2Z"/></svg>
+    Free Estimate
+  </a>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+<script>
+(function () {
+  "use strict";
+  document.getElementById("yr").textContent = new Date().getFullYear();
+
+  // Seamless marquee: duplicate the track contents once.
+  var track = document.getElementById("stripTrack");
+  track.innerHTML += track.innerHTML;
+
+  // Hide the video element entirely if the stock clip can't load —
+  // the layered gradient + caustics shimmer become the hero backdrop.
+  var video = document.getElementById("heroVideo");
+  var killVideo = function () { video.style.display = "none"; };
+  video.addEventListener("error", killVideo, true);
+  Array.prototype.forEach.call(video.querySelectorAll("source"), function (s) {
+    s.addEventListener("error", function () {
+      if (s === video.querySelector("source:last-of-type")) killVideo();
+    });
+  });
+
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduced || typeof gsap === "undefined") {
+    document.documentElement.classList.add("reduced");
+    document.body.classList.add("reduced");
+    return; // static but fully readable
+  }
+
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.ticker.lagSmoothing(500, 33);
+
+  /* ---------- Lenis smooth scrolling, driven by GSAP's ticker ---------- */
+  var lenis = null;
+  if (typeof Lenis !== "undefined") {
+    lenis = new Lenis({ lerp: 0.11, wheelMultiplier: 1, smoothWheel: true });
+    lenis.on("scroll", ScrollTrigger.update);
+    gsap.ticker.add(function (t) { lenis.raf(t * 1000); });
+    // Anchor links route through Lenis for the eased "camera dolly" feel.
+    document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+      a.addEventListener("click", function (e) {
+        var target = document.querySelector(a.getAttribute("href"));
+        if (target) { e.preventDefault(); lenis.scrollTo(target, { offset: -10, duration: 1.4 }); }
+      });
+    });
+  }
+
+  /* ---------- Film-title hero intro ---------- */
+  var title = document.getElementById("heroTitle");
+  title.querySelectorAll(".line").forEach(function (line) {
+    var text = line.textContent;
+    line.textContent = "";
+    text.split("").forEach(function (ch) {
+      var s = document.createElement("span");
+      s.className = "ch";
+      s.textContent = ch;
+      line.appendChild(s);
+    });
+  });
+
+  var intro = gsap.timeline({ defaults: { ease: "power4.out" } });
+  intro
+    .from(".hero-badge", { y: 24, autoAlpha: 0, duration: .9 }, .25)
+    .from(title.querySelectorAll(".ch"), {
+      yPercent: 120, rotateX: -55, autoAlpha: 0, filter: "blur(10px)",
+      duration: 1.15, stagger: { each: .028, from: "start" }
+    }, .45)
+    .to("[data-hero]", { y: 0, autoAlpha: 1, duration: .9, stagger: .14 }, "-=.55")
+    .from(".hero-scrollcue", { autoAlpha: 0, duration: .8 }, "-=.3")
+    .from(".nav", { yPercent: -100, autoAlpha: 0, duration: .8, ease: "power3.out" }, .1);
+
+  /* ---------- Hero camera pull-back on scroll ---------- */
+  gsap.timeline({
+    scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true }
+  })
+    .to("#heroMedia", { scale: 1.18, yPercent: 12, ease: "none" }, 0)
+    .to("#heroInner", { yPercent: -28, autoAlpha: 0, scale: .94, ease: "none" }, 0)
+    .to(".hero-scrollcue", { autoAlpha: 0, ease: "none" }, 0);
+
+  /* ---------- Nav state ---------- */
+  ScrollTrigger.create({
+    start: 60, end: "max",
+    onUpdate: function (self) {
+      document.getElementById("nav").classList.toggle("scrolled", self.scroll() > 60);
+    }
+  });
+
+  /* ---------- Generic reveals: sections enter like camera cuts ---------- */
+  gsap.utils.toArray(".reveal").forEach(function (el) {
+    gsap.fromTo(el,
+      { y: 46, autoAlpha: 0 },
+      {
+        y: 0, autoAlpha: 1, duration: 1.05, ease: "power3.out",
+        scrollTrigger: { trigger: el, start: "top 86%", toggleActions: "play none none reverse" }
+      });
+  });
+
+  /* ---------- Ghost words: slow horizontal parallax drift ---------- */
+  gsap.utils.toArray("[data-ghost]").forEach(function (el) {
+    gsap.fromTo(el, { xPercent: 6 }, {
+      xPercent: -18, ease: "none",
+      scrollTrigger: { trigger: el.parentElement, start: "top bottom", end: "bottom top", scrub: true }
+    });
+  });
+
+  /* ---------- 3D tilt cards (pointer devices only) ---------- */
+  if (window.matchMedia("(hover:hover) and (pointer:fine)").matches) {
+    document.querySelectorAll("[data-tilt]").forEach(function (card) {
+      var qx = gsap.quickTo(card, "rotationY", { duration: .5, ease: "power3.out" });
+      var qy = gsap.quickTo(card, "rotationX", { duration: .5, ease: "power3.out" });
+      var qs = gsap.quickTo(card, "scale",     { duration: .5, ease: "power3.out" });
+      card.addEventListener("pointermove", function (e) {
+        var r = card.getBoundingClientRect();
+        var px = (e.clientX - r.left) / r.width;
+        var py = (e.clientY - r.top) / r.height;
+        qx((px - .5) * 14);
+        qy((.5 - py) * 12);
+        qs(1.025);
+        card.style.setProperty("--mx", (px * 100) + "%");
+        card.style.setProperty("--my", (py * 100) + "%");
+      });
+      card.addEventListener("pointerleave", function () { qx(0); qy(0); qs(1); });
+    });
+  }
+
+  /* ---------- Count-up stats ---------- */
+  gsap.utils.toArray("[data-count]").forEach(function (el) {
+    var to   = parseFloat(el.getAttribute("data-count"));
+    var from = parseFloat(el.getAttribute("data-from") || "0");
+    var dur  = parseFloat(el.getAttribute("data-dur") || "2");
+    var obj  = { v: from };
+    el.textContent = from;
+    gsap.to(obj, {
+      v: to, duration: dur, ease: "power2.out",
+      snap: { v: 1 },
+      onUpdate: function () { el.textContent = Math.round(obj.v); },
+      scrollTrigger: { trigger: el, start: "top 88%", once: true }
+    });
+  });
+
+  /* ---------- Kinetic typography: pinned word sequence ---------- */
+  var words = gsap.utils.toArray("#kinetic .kinetic-word");
+  gsap.set(words, { autoAlpha: 0, scale: 1.6, yPercent: 30, transformOrigin: "left center" });
+  var kin = gsap.timeline({
+    scrollTrigger: {
+      trigger: "#kinetic", start: "top top", end: "+=220%",
+      pin: true, scrub: .6, anticipatePin: 1
+    }
+  });
+  words.forEach(function (w, i) {
+    kin.to(w, { autoAlpha: 1, scale: 1, yPercent: 0, duration: 1, ease: "power3.out" }, i * 1.15)
+       .to(w, { xPercent: i % 2 ? 4 : -4, duration: 1.2, ease: "none" }, i * 1.15 + 1);
+  });
+  kin.to({}, { duration: .6 }); // hold on the full lockup before the cut
+
+  /* ---------- Testimonials: cinematic horizontal dolly (desktop) ---------- */
+  ScrollTrigger.matchMedia({
+    "(min-width: 900px)": function () {
+      var rail = document.getElementById("testiRail");
+      var move = function () { return -(rail.scrollWidth - window.innerWidth); };
+      gsap.to(rail, {
+        x: move, ease: "none",
+        scrollTrigger: {
+          trigger: ".testi", start: "top top",
+          end: function () { return "+=" + (rail.scrollWidth - window.innerWidth + 200); },
+          pin: true, scrub: .5, invalidateOnRefresh: true, anticipatePin: 1
+        }
+      });
+    },
+    "(max-width: 899px)": function () {
+      gsap.utils.toArray(".testi-card").forEach(function (card, i) {
+        gsap.fromTo(card,
+          { x: i % 2 ? 60 : -60, autoAlpha: 0 },
+          {
+            x: 0, autoAlpha: 1, duration: 1, ease: "power3.out",
+            scrollTrigger: { trigger: card, start: "top 88%", toggleActions: "play none none reverse" }
+          });
+      });
+    }
+  });
+
+  /* ---------- Service-area city chips cascade ---------- */
+  gsap.from("#cityCloud .city", {
+    y: 20, autoAlpha: 0, duration: .6, ease: "power2.out",
+    stagger: { each: .035, from: "random" },
+    scrollTrigger: { trigger: "#cityCloud", start: "top 85%", once: true }
+  });
+
+  /* ---------- Section headers: subtle depth parallax ---------- */
+  gsap.utils.toArray(".section-title").forEach(function (h) {
+    gsap.fromTo(h, { yPercent: 10 }, {
+      yPercent: -6, ease: "none",
+      scrollTrigger: { trigger: h, start: "top bottom", end: "bottom top", scrub: true }
+    });
+  });
+})();
+</script>
+</body>
+</html>
