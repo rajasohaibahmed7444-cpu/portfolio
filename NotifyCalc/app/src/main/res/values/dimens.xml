@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="screen_padding">24dp</dimen>
+    <dimen name="card_spacing">16dp</dimen>
+
+    <!-- Calculator display -->
+    <dimen name="calc_expression_text_size">44sp</dimen>
+    <dimen name="calc_preview_text_size">26sp</dimen>
+    <dimen name="calc_display_padding">24dp</dimen>
+
+    <!-- Calculator keypad -->
+    <dimen name="calc_keypad_padding">8dp</dimen>
+    <dimen name="calc_button_margin">4dp</dimen>
+    <dimen name="calc_button_text_size">24sp</dimen>
+    <dimen name="calc_button_corner_radius">28dp</dimen>
+</resources>

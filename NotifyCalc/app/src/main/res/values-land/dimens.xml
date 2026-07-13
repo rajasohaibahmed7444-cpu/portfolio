@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Compact sizes for landscape so the full keypad stays comfortable. -->
+<resources>
+    <dimen name="calc_expression_text_size">34sp</dimen>
+    <dimen name="calc_preview_text_size">20sp</dimen>
+    <dimen name="calc_display_padding">16dp</dimen>
+
+    <dimen name="calc_keypad_padding">6dp</dimen>
+    <dimen name="calc_button_margin">3dp</dimen>
+    <dimen name="calc_button_text_size">18sp</dimen>
+    <dimen name="calc_button_corner_radius">20dp</dimen>
+</resources>
