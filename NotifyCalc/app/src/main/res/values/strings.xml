@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">NotifyCalc</string>
+
+    <!-- Welcome screen -->
+    <string name="welcome_title">Welcome to NotifyCalc</string>
+    <string name="welcome_subtitle">A fast, modern calculator with an optional notification backup feature.</string>
+    <string name="welcome_point_calculator">The calculator works fully and normally whether or not Notification Backup is enabled.</string>
+    <string name="welcome_point_optional">Notification Backup is completely optional. You can enable or disable it at any time in Settings.</string>
+    <string name="welcome_point_permission">Notification Backup requires the system Notification access permission, which you grant manually in Android settings.</string>
+    <string name="welcome_enable_backup">Enable Notification Backup</string>
+    <string name="welcome_skip">Continue Without Backup</string>
+
+    <!-- Calculator display -->
+    <string name="calc_zero">0</string>
+    <string name="error_divide_by_zero">Can\'t divide by zero</string>
+    <string name="error_invalid_expression">Invalid expression</string>
+
+    <!-- Calculator keypad -->
+    <string name="calc_0">0</string>
+    <string name="calc_1">1</string>
+    <string name="calc_2">2</string>
+    <string name="calc_3">3</string>
+    <string name="calc_4">4</string>
+    <string name="calc_5">5</string>
+    <string name="calc_6">6</string>
+    <string name="calc_7">7</string>
+    <string name="calc_8">8</string>
+    <string name="calc_9">9</string>
+    <string name="calc_decimal">.</string>
+    <string name="calc_add">+</string>
+    <string name="calc_subtract">−</string>
+    <string name="calc_multiply">×</string>
+    <string name="calc_divide">÷</string>
+    <string name="calc_percent" formatted="false">%</string>
+    <string name="calc_sign">+/−</string>
+    <string name="calc_clear">AC</string>
+    <string name="calc_delete">⌫</string>
+    <string name="calc_equals">=</string>
+    <string name="cd_delete">Delete last character</string>
+    <string name="cd_history">Calculation history</string>
+    <string name="cd_settings">Settings</string>
+
+    <!-- History sheet -->
+    <string name="history_title">History</string>
+    <string name="history_empty">No calculations yet</string>
+    <string name="history_clear">Clear</string>
+
+    <!-- Settings screen -->
+    <string name="settings_title">Settings</string>
+    <string name="backup_section_title">Notification Backup</string>
+    <string name="backup_section_description">When enabled, newly delivered notifications are processed by the backup service. Nothing is stored on this device.</string>
+    <string name="backup_status_active">Status: Active — notification backup is running.</string>
+    <string name="backup_status_awaiting_permission">Status: Enabled — waiting for Notification access permission.</string>
+    <string name="backup_status_disabled">Status: Disabled — notifications are not processed.</string>
+    <string name="backup_permission_warning">Notification access has not been granted. Open the system settings below and allow NotifyCalc to access notifications.</string>
+    <string name="open_notification_access">Open Notification Access</string>
+    <string name="last_notification_title">Last processed notification</string>
+    <string name="last_notification_empty">No notifications processed yet</string>
+    <string name="last_notification_no_title">(no title)</string>
+    <string name="last_notification_format">%1$s — %2$s</string>
+    <string name="about_section_title">About</string>
+    <string name="app_version_label">Version</string>
+    <string name="about_button">About NotifyCalc</string>
+    <string name="about_dialog_title">About NotifyCalc</string>
+    <string name="about_dialog_message">NotifyCalc is a modern Material Design 3 calculator with an optional notification backup feature.\n\nThe calculator works fully offline and independently. Notification Backup, when enabled, receives newly delivered notifications through Android\'s official notification listener API and hands them to the app\'s backup pipeline. Notifications are never stored on this device.</string>
+
+    <!-- Notification access dialogs / errors -->
+    <string name="dialog_access_title">Notification access required</string>
+    <string name="dialog_access_message">To back up notifications, NotifyCalc needs the Notification access permission. You grant it manually on the next screen by enabling NotifyCalc in the list.</string>
+    <string name="dialog_open_settings">Open settings</string>
+    <string name="dialog_later">Later</string>
+    <string name="error_open_settings">Unable to open the Notification access settings on this device.</string>
+
+    <!-- Service -->
+    <string name="notification_backup_service_label">NotifyCalc Notification Backup</string>
+</resources>

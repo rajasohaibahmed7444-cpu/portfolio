@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Base application theme. Color resources flip automatically between
+         values/ and values-night/, so a single theme covers both modes. -->
+    <style name="Theme.NotifyCalc" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/nc_primary</item>
+        <item name="colorOnPrimary">@color/nc_on_primary</item>
+        <item name="colorPrimaryContainer">@color/nc_primary_container</item>
+        <item name="colorOnPrimaryContainer">@color/nc_on_primary_container</item>
+
+        <item name="colorSecondary">@color/nc_secondary</item>
+        <item name="colorOnSecondary">@color/nc_on_secondary</item>
+        <item name="colorSecondaryContainer">@color/nc_secondary_container</item>
+        <item name="colorOnSecondaryContainer">@color/nc_on_secondary_container</item>
+
+        <item name="colorTertiary">@color/nc_tertiary</item>
+        <item name="colorOnTertiary">@color/nc_on_tertiary</item>
+        <item name="colorTertiaryContainer">@color/nc_tertiary_container</item>
+        <item name="colorOnTertiaryContainer">@color/nc_on_tertiary_container</item>
+
+        <item name="android:colorBackground">@color/nc_background</item>
+        <item name="colorOnBackground">@color/nc_on_background</item>
+        <item name="colorSurface">@color/nc_surface</item>
+        <item name="colorOnSurface">@color/nc_on_surface</item>
+        <item name="colorSurfaceVariant">@color/nc_surface_variant</item>
+        <item name="colorOnSurfaceVariant">@color/nc_on_surface_variant</item>
+        <item name="colorOutline">@color/nc_outline</item>
+    </style>
+
+    <!-- Calculator keypad button styles -->
+
+    <style name="Widget.NotifyCalc.CalcButton" parent="Widget.Material3.Button.UnelevatedButton">
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:textSize">@dimen/calc_button_text_size</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="backgroundTint">?attr/colorSurfaceVariant</item>
+        <item name="cornerRadius">@dimen/calc_button_corner_radius</item>
+    </style>
+
+    <style name="Widget.NotifyCalc.CalcButton.Operator">
+        <item name="backgroundTint">?attr/colorSecondaryContainer</item>
+        <item name="android:textColor">?attr/colorOnSecondaryContainer</item>
+    </style>
+
+    <style name="Widget.NotifyCalc.CalcButton.Action">
+        <item name="backgroundTint">?attr/colorTertiaryContainer</item>
+        <item name="android:textColor">?attr/colorOnTertiaryContainer</item>
+    </style>
+
+    <style name="Widget.NotifyCalc.CalcButton.Equals">
+        <item name="backgroundTint">?attr/colorPrimary</item>
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+    </style>
+</resources>
